@@ -32,3 +32,5 @@ labApp.config(function($translateProvider){
     $translateProvider.preferredLanguage('en');
     $translateProvider.fallbackLanguage('en');
 })
+
+lapApp.constant('API_URL','http://localhost:8080')
