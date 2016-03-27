@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by mohailing on 3/27/2016.
  */
-
+@CrossOrigin
 @RestController
 @RequestMapping("/shoppingcart")
 public class ShoppingCartController {
@@ -21,12 +21,12 @@ public class ShoppingCartController {
         ShoppingCartService shoppingCartService;
         @RequestMapping(value="/{id}",method = RequestMethod.GET)
         public ShoppingCart getShoppingCart(@PathVariable("id") Long id){
-                return shoppingCartService.findById(id);
+            return shoppingCartService.findById(id);
             }
 
-                @RequestMapping(value="/{id}",method = RequestMethod.PUT)
+        @RequestMapping(value="/{id}",method = RequestMethod.PUT)
         public ShoppingCart updateShoppingCart(@PathVariable("id")Long id,
-                                               @RequestBody ShoppingCart cart, BindingResult bindingResult){
+        @RequestBody ShoppingCart cart, BindingResult bindingResult){
                 return shoppingCartService.addShoppingCart(cart);
             }
     }

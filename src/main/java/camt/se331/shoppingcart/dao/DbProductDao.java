@@ -1,22 +1,34 @@
 package camt.se331.shoppingcart.dao;
 
 import camt.se331.shoppingcart.entity.Product;
+import camt.se331.shoppingcart.entity.SelectedProduct;
 import camt.se331.shoppingcart.repository.ProductRepository;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
- * Created by mohailing on 3/26/2016.
+ * Created by Dto on 2016/03/22.
  */
+
 @Repository
-public class DbProductDao implements ProductDao {
+public class DbProductDao implements ProductDao{
     @Autowired
     ProductRepository productRepository;
     @Override
     public List<Product> getProducts() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public List<Product> getProductsByName(String name) {
+        return productRepository.findByNameContaining(name);
+    }
+    public List<Product> getProductsByNameOrDescription(String name,String description) {
+        return productRepository.findByNameOrDescription(name,name);
     }
 
     @Override
@@ -45,13 +57,11 @@ public class DbProductDao implements ProductDao {
         product.setId(null);
         return product;
     }
-
     @Override
     public Product updateProduct(Product product) {
         return productRepository.save(product);
     }
 
-    public List<Product> getProductsByName(String name){
-        return productRepository.findByNameLike(name);
-    }
+
 }
+
