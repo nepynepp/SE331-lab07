@@ -39,7 +39,6 @@ public class DatabaseInitializationBean implements InitializingBean {
 
         productRepository.save(Arrays.asList(initProduct));
         productRepository.save(new Product(1l,"Kindle","the good book reader",6900.00));
-
     }
 }
 
