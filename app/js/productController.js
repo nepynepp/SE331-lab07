@@ -20,8 +20,11 @@ productMainController.controller('addProductController', ['$scope', '$http', '$l
 
     }]);
 
-productMainController.controller('listProductController', ['$scope', '$http', '$rootScope','productService','$route','totalCalService',
-    function ($scope, $http, $rootScope,productService,$route,totalCalService) {
+productMainController.controller('listProductController', ['$scope', '$http', '$rootScope','productService','$route','totalCalService','queryProductService',
+    function ($scope, $http, $rootScope,productService,$route,totalCalService,queryProductService) {
+    $scope.searchProduct = function(name){
+    queryProductService.query({name:name},function(data){$scope.products = data});
+}
         //$http.get("/product/").success(function (data) {
         var data = productService.query(function(){
             $scope.totalNetPrice= totalCalService.getTotalNetPrice(data);
@@ -44,6 +47,12 @@ productMainController.controller('listProductController', ['$scope', '$http', '$
                 })
             }
         }
+        $scope.searchProduct = function(name){
+            queryProductService.query({name:name},function(data) {
+                $scope.products = data;
+            });
+        }
+
 
     }]);
 
@@ -52,7 +61,7 @@ productMainController.controller('editProductController', ['$scope', '$http', '$
         $scope.addPerson = false;
         $scope.editPerson = true;
         var id = $routeParams.id;
-        $http.get("/product/" + id).success(function (data) {
+        $http.get("http://localhost:8080/product/" + id).success(function (data) {
             $scope.product = data;
         });
 

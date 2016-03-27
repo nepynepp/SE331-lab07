@@ -17,7 +17,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -36,8 +35,9 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableJpaRepositories("camt.se331.shoppingcart.repository")
-@PropertySources(value = {@PropertySource("classpath:/hibernate.properties")})
+@PropertySources(value={@PropertySource("classpath:/hibernate.properties")})
 class PersistenceContext {
+
     private static final String[] ENTITY_PACKAGES = {
             "camt.se331.shoppingcart.entity"
     };
@@ -50,14 +50,18 @@ class PersistenceContext {
     private static final String PROPERTY_NAME_DB_PASSWORD = "db.password";
     private static final String PROPERTY_NAME_DB_URL = "db.url";
     private static final String PROPERTY_NAME_DB_USER = "db.username";
+
     @Bean
-    public HibernateExceptionTranslator hibernateExceptionTranslator(){
-        return  new HibernateExceptionTranslator();
+    public HibernateExceptionTranslator hibernateExceptionTranslator() {
+        return new HibernateExceptionTranslator();
     }
+
+
     @Autowired
     private Environment env;
+
     @Bean
-    public  BoneCPDataSource boneCPDataSource(){
+    public BoneCPDataSource boneCPDataSource(){
         BoneCPDataSource boneCPDataSource = new BoneCPDataSource();
         boneCPDataSource.setDriverClass(env.getRequiredProperty(PROPERTY_NAME_DB_DRIVER_CLASS));
         boneCPDataSource.setJdbcUrl(env.getRequiredProperty(PROPERTY_NAME_DB_URL));
@@ -70,11 +74,14 @@ class PersistenceContext {
         boneCPDataSource.setPartitionCount(3);
         boneCPDataSource.setAcquireIncrement(5);
         boneCPDataSource.setStatementsCacheSize(100);
-        return  boneCPDataSource;
+
+
+        return boneCPDataSource;
+
     }
     @Bean
     @Autowired
-    public EntityManagerFactory entityManagerFactory(DataSource dataSource){
+    public EntityManagerFactory entityManagerFactory(DataSource dataSource) {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(true);
         vendorAdapter.setShowSql(false);
@@ -84,24 +91,33 @@ class PersistenceContext {
         factory.setPackagesToScan(ENTITY_PACKAGES);
         factory.setDataSource(dataSource);
         Properties jpaProperties = new Properties();
-        jpaProperties.put(PROPERTY_NAME_HIBERNATE_DIALECT,env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
-        jpaProperties.put(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO,env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO));
-        //if the properties is true, Hibernate writes all SQL
-        jpaProperties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL,env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
-        //if the properties is trud,Hibernate will use prettyprint
-        jpaProperties.put(PROPERTY_NAME_HIBERNATE_FORMAT_SQL,env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_FORMAT_SQL));
+        jpaProperties.put(PROPERTY_NAME_HIBERNATE_DIALECT, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
+
+        jpaProperties.put(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO));
+
+        //If the value of this property is true, Hibernate writes all SQL
+        //statements to the console.
+        jpaProperties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
+
+        //If the value of this property is true, Hibernate will use prettyprint
+        //when it writes SQL to the console.
+        jpaProperties.put(PROPERTY_NAME_HIBERNATE_FORMAT_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_FORMAT_SQL));
         factory.setJpaProperties(jpaProperties);
-        factory.afterPropertiesSet();
-        return  factory.getObject();
+
+        factory.afterPropertiesSet();;
+        return factory.getObject();
     }
+
+
     @Bean
     @Autowired
-    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory){
+    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager txManager = new JpaTransactionManager();
         JpaDialect jpaDialect = new HibernateJpaDialect();
         txManager.setEntityManagerFactory(entityManagerFactory);
         txManager.setJpaDialect(jpaDialect);
-        return  txManager;
+        return txManager;
     }
+
 
 }

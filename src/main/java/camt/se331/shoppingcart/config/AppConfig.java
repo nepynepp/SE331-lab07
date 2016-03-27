@@ -14,7 +14,11 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import java.util.Locale;
 
-@Import({PersistenceContext.class})
+@EnableWebMvc
+@Configuration
+@ComponentScan(basePackages = {"camt.se331.shoppingcart"})
+@EnableAspectJAutoProxy
+
 public class AppConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -62,6 +66,16 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         LocaleChangeInterceptor localChangeInterceptor = new LocaleChangeInterceptor();
         localChangeInterceptor.setParamName("lang");
         return localChangeInterceptor;
+    }
+    @Bean
+    public WebMvcConfigurer corsConfiger(){
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("http://localhost:8000");
+            }
+        }
+                ;
     }
 
 

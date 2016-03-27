@@ -6,31 +6,34 @@ var labApp = angular.module('labApp', [
     'productMainController',
     'languageControllers',
     'languageServices',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'shoppingCartControllers'
 ])
 labApp.config(['$routeProvider',
-  function($routeProvider) {
-  $routeProvider.
-      when('/addProduct',{
-          templateUrl: 'template/editProduct.html',
-          controller: 'addProductController'
-      }).
-      when('/editProduct/:id',{
-          templateUrl: 'template/editProduct.html',
-          controller: 'editProductController'
-      }).
-      when('/listProduct',{
-          templateUrl: 'template/productList.html',
-          controller: 'listProductController'
-      }).
-       otherwise({redirectTo: '/listProduct'});
-}]);
+    function($routeProvider) {
+        $routeProvider.
+        when('/addProduct',{
+            templateUrl: 'template/editProduct.html',
+            controller: 'addProductController'
+        }).
+        when('/editProduct/:id',{
+            templateUrl: 'template/editProduct.html',
+            controller: 'editProductController'
+        }).
+        when('/listProduct',{
+            templateUrl: 'template/productList.html',
+            controller: 'listProductController'
+        }).
+        when('/shoppingCart/:id',{
+            templateUrl: 'template/shoppingCart.html',
+            controller: 'showShoppingCartController'
+        }).
+        otherwise({redirectTo: '/listProduct'});
+    }]);
 
 labApp.config(function($translateProvider){
-    $translateProvider.useUrlLoader('/messageBundle');
+    $translateProvider.useUrlLoader('http://localhost:8080/messageBundle');
     $translateProvider.useStorage('UrlLanguageStorage');
     $translateProvider.preferredLanguage('en');
     $translateProvider.fallbackLanguage('en');
 })
-
-lapApp.constant('API_URL','http://localhost:8080')

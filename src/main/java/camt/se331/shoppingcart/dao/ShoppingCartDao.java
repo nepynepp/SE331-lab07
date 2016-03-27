@@ -14,4 +14,6 @@ public interface ShoppingCartDao {
     List<ShoppingCart> getShoppingCartBetween(Date stateDate, Date stopDate);
     ShoppingCart addShoppingCart(ShoppingCart shoppingCart);
     ShoppingCart deleteShoppingCart(ShoppingCart shoppingCart);
+
+    ShoppingCart findById(Long id);
 }
