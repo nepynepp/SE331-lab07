@@ -17,6 +17,11 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     ShoppingCartRepository shoppingCartRepository;
 
     @Override
+    public ShoppingCart findById(Long id) {
+        return shoppingCartRepository.findOne(id);
+    }
+
+    @Override
     public List<ShoppingCart> getShoppingCarts() {
         return null;
     }

@@ -14,23 +14,17 @@ import java.util.List;
 @Entity
 public class ShoppingCart {
 
+    @OneToMany(fetch = FetchType.EAGER)
 
     @Id
-    @GeneratedValue
-    Long id;
-    @OneToMany(fetch = FetchType.EAGER)
+            @GeneratedValue
+            Long id;
+    @OneToMany(fetch =FetchType.EAGER)
     @Cascade(CascadeType.ALL)
     List<SelectedProduct> selectedProducts;
     @Temporal(TemporalType.TIMESTAMP)
     Date purchaseDate;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
     public double getTotalProductPrice(){
         return 0.0;
     };
