@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Locale;
 import java.util.Properties;
-
 @CrossOrigin
 @Controller
 @RequestMapping("/messageBundle")

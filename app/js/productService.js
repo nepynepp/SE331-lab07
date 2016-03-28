@@ -6,7 +6,6 @@ productService.factory('productService',function($resource){
         update: {
             method: 'PUT' // this method issues a PUT request
         }});
-
 })
 productService.factory('queryProductService',function($resource) {
     return $resource('http://localhost:8080/getProduct/?name=:name',

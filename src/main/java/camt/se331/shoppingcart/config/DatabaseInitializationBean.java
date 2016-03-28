@@ -56,8 +56,6 @@ public class DatabaseInitializationBean implements InitializingBean {
         shoppingCartRepository.save(shoppingCart);
 
 
-
-
         ShoppingCart NewshoppingCart = new ShoppingCart();
         List<SelectedProduct> NewselectedProducts = new ArrayList<>();
         SelectedProduct[] NewinitSelectedProduct = {

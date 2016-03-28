@@ -1,6 +1,5 @@
 package camt.se331.shoppingcart.config;
 
-
 import camt.se331.shoppingcart.common.SerializableResourceBundleMessageSource;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;

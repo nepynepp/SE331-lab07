@@ -17,7 +17,6 @@ productMainController.controller('addProductController', ['$scope', '$http', '$l
             });
         };
 
-
     }]);
 
 productMainController.controller('listProductController', ['$scope', '$http', '$rootScope','productService','$route','totalCalService','queryProductService',

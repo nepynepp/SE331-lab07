@@ -30,4 +30,3 @@ public class ShoppingCartController {
         return shoppingCartService.addShoppingCart(cart);
     }
 }
-
