@@ -18,12 +18,6 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @RequestMapping(value = "getProduct",method = RequestMethod.GET)
-    public  List<Product> getListByName(@RequestParam("name")String name){
-        return productService.getProductsByName(name);
-    }
-
-
     @RequestMapping(value = "product",method = RequestMethod.GET)
     public  List<Product> list(){
         return productService.getProducts();
@@ -48,4 +42,8 @@ public class ProductController {
     public  Product edit(@PathVariable("id") Long id){
         return productService.deleteProduct(id);
     }
+
+    @RequestMapping(value = "getProduct",method = RequestMethod.GET)
+    public  List<Product> getListByName(@RequestParam("name")String name){
+        return productService.getProductsByName(name);}
 }

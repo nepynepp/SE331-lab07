@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="panel panel-default" xmlns:ng="http://www.w3.org/1999/xhtml">
     <!-- Default panel contents -->
     <div class="panel-heading">ShoppingCart</div>
     <div class="panel-body">
@@ -11,12 +11,11 @@
             <table class="table table-hover">
                 <tr>
                     <th>#</th>
-                    <th translate>listProduct.name </th>
+                    <th translate>listProduct.name</th>
                     <th translate>listProduct.description</th>
                     <th class="text-right" translate>listProduct.amount</th>
                     <th class="text-right" translate>listProduct.netPrice</th>
                     <th class="text-right" translate>listProduct.price</th>
-
 
 
                 </tr>
@@ -24,14 +23,15 @@
                     <td>{{$index+1}}</td>
                     <td>{{selectedProduct.product.name}}</td>
                     <td>{{selectedProduct.product.description}}</td>
-                    <td class=" col-xs-1"><input ng-model="selectedProduct.amount" class="form-control text-right" id="selectedproductamount"
-                                                 placeholder="amount" name="productdescription" required/></td>
+                    <td class=" col-xs-1"><input ng-model="selectedProduct.amount" class="form-control text-right"
+                                                 id="selectedproductamount"
+                                                 + placeholder="amount" name="productdescription" required/></td>
                     <td class="text-right">{{selectedProduct.product.netPrice | number:2}}</td>
                     <td class="text-right">{{totalEach($index) |number:2}}</td>
                 </tr>
                 <tr>
                     <th></th>
-                    <th><strong translate>listProduct.total</strong> </th>
+                    <th><strong translate>listProduct.total</strong></th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -39,7 +39,7 @@
                 </tr>
             </table>
             <div class="panel-body text-center">
-                <a ng-click="updateCart()" class="btn btn-primary ">update cart</a>
+                <a href ng:click="updateCart()" class="btn btn-primary ">update cart</a>
             </div>
         </div>
     </form>

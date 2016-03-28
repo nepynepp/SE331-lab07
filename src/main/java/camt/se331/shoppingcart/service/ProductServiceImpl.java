@@ -1,5 +1,6 @@
 package camt.se331.shoppingcart.service;
 
+import camt.se331.shoppingcart.dao.DbProductDao;
 import camt.se331.shoppingcart.dao.ProductDao;
 import camt.se331.shoppingcart.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +15,10 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    ProductDao productDao;
+    ProductDao productDao=new DbProductDao();
     @Override
     public List<Product> getProducts() {
         return productDao.getProducts();
-    }
-
-    @Override
-    public List<Product> getProductsByName(String name) {
-        return productDao.getProductsByName(name);
-    }
-
-    @Override
-    public List<Product> getProductsByNameOrDescription(String name, String description) {
-        return null;
     }
 
     @Override
@@ -49,5 +40,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product updateProduct(Product product) {
         return productDao.updateProduct(product);
+    }
+
+    @Override
+    public List<Product> getProductsByName(String name) {
+        return productDao.getProductsByName(name);
     }
 }

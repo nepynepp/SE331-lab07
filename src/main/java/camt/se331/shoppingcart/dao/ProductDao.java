@@ -9,13 +9,11 @@ import java.util.List;
  */
 public interface ProductDao {
     List<Product> getProducts();
-    List<Product> getProductsByName(String name);
     List<Product> getProductByName(String name);
     List<Product> getProductByDescription(String description);
-    List<Product> getProductsByNameOrDescription (String name,String description);
     Product getProduct(Long id);
     Product addProduct(Product product);
     Product deleteProduct(Product product);
     Product updateProduct(Product product);
-
+    List<Product> getProductsByName(String name);
 }

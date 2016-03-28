@@ -17,17 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/shoppingcart")
 public class ShoppingCartController {
-        @Autowired
-        ShoppingCartService shoppingCartService;
-        @RequestMapping(value="/{id}",method = RequestMethod.GET)
-        public ShoppingCart getShoppingCart(@PathVariable("id") Long id){
-            return shoppingCartService.findById(id);
-            }
+    @Autowired
+    ShoppingCartService shoppingCartService;
 
-        @RequestMapping(value="/{id}",method = RequestMethod.PUT)
-        public ShoppingCart updateShoppingCart(@PathVariable("id")Long id,
-        @RequestBody ShoppingCart cart, BindingResult bindingResult){
-                return shoppingCartService.addShoppingCart(cart);
-            }
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ShoppingCart getShoppingCart(@PathVariable("id") Long id) {
+        return shoppingCartService.findById(id);
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ShoppingCart updateShoppingCart(@PathVariable("id") Long id, @RequestBody ShoppingCart cart, BindingResult bindingResult) {
+        return shoppingCartService.addShoppingCart(cart);
+    }
+}
 

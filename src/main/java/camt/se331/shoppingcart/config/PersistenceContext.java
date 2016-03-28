@@ -16,6 +16,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -32,12 +33,12 @@ import java.util.Properties;
  *
  * @author Petri Kainulainen
  */
+@CrossOrigin
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableJpaRepositories("camt.se331.shoppingcart.repository")
 @PropertySources(value={@PropertySource("classpath:/hibernate.properties")})
 class PersistenceContext {
-
     private static final String[] ENTITY_PACKAGES = {
             "camt.se331.shoppingcart.entity"
     };
@@ -55,7 +56,6 @@ class PersistenceContext {
     public HibernateExceptionTranslator hibernateExceptionTranslator() {
         return new HibernateExceptionTranslator();
     }
-
 
     @Autowired
     private Environment env;
@@ -104,7 +104,7 @@ class PersistenceContext {
         jpaProperties.put(PROPERTY_NAME_HIBERNATE_FORMAT_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_FORMAT_SQL));
         factory.setJpaProperties(jpaProperties);
 
-        factory.afterPropertiesSet();
+        factory.afterPropertiesSet();;
         return factory.getObject();
     }
 
@@ -118,4 +118,5 @@ class PersistenceContext {
         txManager.setJpaDialect(jpaDialect);
         return txManager;
     }
+
 }

@@ -15,20 +15,12 @@ import java.util.List;
  */
 
 @Repository
-public class DbProductDao implements ProductDao{
+public class DbProductDao implements ProductDao {
     @Autowired
     ProductRepository productRepository;
     @Override
     public List<Product> getProducts() {
         return productRepository.findAll();
-    }
-
-    @Override
-    public List<Product> getProductsByName(String name) {
-        return productRepository.findByNameContaining(name);
-    }
-    public List<Product> getProductsByNameOrDescription(String name,String description) {
-        return productRepository.findByNameOrDescription(name,name);
     }
 
     @Override
@@ -57,11 +49,15 @@ public class DbProductDao implements ProductDao{
         product.setId(null);
         return product;
     }
+
     @Override
     public Product updateProduct(Product product) {
         return productRepository.save(product);
     }
 
-
+    @Override
+    public List<Product> getProductsByName(String name) {
+        return productRepository.findByNameOrDescriptionContainingIgnoreCase(name,name);
+    }
 }
 
