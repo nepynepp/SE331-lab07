@@ -2,8 +2,8 @@
 
 var shoppingCartControllers = angular.module('shoppingCartControllers', ['shoppingCartServices']);
 
-shoppingCartControllers.controller('showShoppingCartController', ['$scope', 'shoppingCartServices', '$location', '$rootScope','$routeParam',
-    function ($scope, $http, $location, $rootScope,shoppingCartServices,$rootParams) {
+shoppingCartControllers.controller('showShoppingCartController', ['$scope', 'shoppingCartServices', '$location', '$rootScope','$routeParams',
+    function ($scope,shoppingCartServices,$location,$rootScope,$rootParams) {
         var id =$rootParams.id;
         shoppingCartServices.get({id:id},function(data){
             $scope.cart = data;
@@ -14,7 +14,7 @@ shoppingCartControllers.controller('showShoppingCartController', ['$scope', 'sho
         $scope.updateCart = function(){
             shoppingCartServices.update({id:id},$scope.cart,function(){
                 $rootScope.cartUpdateSuccess = true;
-            })
+            });
         }
         $scope.totalEach = function(index){
             return $scope.cart.selectedProducts[index].product.totalprice*$scope.cart.selectedProducts[index].amount;
@@ -26,6 +26,5 @@ shoppingCartControllers.controller('showShoppingCartController', ['$scope', 'sho
             })
             return total;
         }
-
 
     }]);

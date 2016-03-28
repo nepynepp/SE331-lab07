@@ -11,7 +11,6 @@ import java.util.List;
 public interface ShoppingCartService {
 
     List<ShoppingCart> getShoppingCarts();
-    List<ShoppingCart> getShoppingCartBefore(Date stateDate);
     List<ShoppingCart> getShoppingCartBetween(Date stateDate, Date stopDate);
     ShoppingCart addShoppingCart(ShoppingCart shoppingCart);
     ShoppingCart deleteShoppingCart(ShoppingCart shoppingCart);

@@ -104,7 +104,7 @@ class PersistenceContext {
         jpaProperties.put(PROPERTY_NAME_HIBERNATE_FORMAT_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_FORMAT_SQL));
         factory.setJpaProperties(jpaProperties);
 
-        factory.afterPropertiesSet();;
+        factory.afterPropertiesSet();
         return factory.getObject();
     }
 
@@ -118,6 +118,4 @@ class PersistenceContext {
         txManager.setJpaDialect(jpaDialect);
         return txManager;
     }
-
-
 }

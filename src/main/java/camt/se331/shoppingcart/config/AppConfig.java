@@ -19,6 +19,7 @@ import java.util.Locale;
 @ComponentScan(basePackages = {"camt.se331.shoppingcart"})
 @EnableAspectJAutoProxy
 
+@Import({PersistenceContext.class})
 public class AppConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -74,10 +75,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedOrigins("http://localhost:8000");
             }
-        }
-                ;
+        };
     }
-
-
-
 }
